@@ -1,7 +1,11 @@
-<mat-toolbar color="primary">
-    <button mat-flat-button color="primary" routerLink="/">Foony's Workshop</button>
-    <div id="navigation">
-        <button mat-button color="accent" routerLink="/about">About</button>
+<div id="app">
+    <mat-toolbar color="primary">
+        <button mat-flat-button color="primary" routerLink="/">Foony's Workshop</button>
+        <div id="navigation">
+            <button mat-button color="accent" routerLink="/about">About</button>
+        </div>
+    </mat-toolbar>
+    <div id="page">
+        <router-outlet></router-outlet>
     </div>
-</mat-toolbar>
-<router-outlet></router-outlet>
+</div>

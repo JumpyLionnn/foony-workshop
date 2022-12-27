@@ -1,5 +1,16 @@
-#navigation{
+#app {
     display: flex;
-    gap: 1em;
-    margin-left: 1em;
+    flex-direction: column;
+    height: 100%;
+
+    #navigation {
+        display: flex;
+        gap: 1em;
+        margin-left: 1em;
+    }
+
+    #page {
+        flex-grow: 1;
+        width: 100%;
+    }
 }
