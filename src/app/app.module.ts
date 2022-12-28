@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { EditorWrapperComponent } from './editor-wrapper/editor-wrapper.component';
 import { EditableWordsListComponent } from './editable-words-list/editable-words-list.component';
 import { WordsListEditorComponent } from './words-list-editor/words-list-editor.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,6 +21,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ClipboardModule } from '@angular/cdk/clipboard';
@@ -48,7 +50,8 @@ const dbConfig: DBConfig  = {
         AboutComponent,
         EditableWordsListComponent,
         EditorWrapperComponent,
-        WordsListEditorComponent
+        WordsListEditorComponent,
+        DeleteDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -66,6 +69,7 @@ const dbConfig: DBConfig  = {
         MatIconModule,
         MatDividerModule,
         MatSnackBarModule,
+        MatDialogModule,
         MatListModule,
 
         ClipboardModule,
