@@ -1,0 +1,11 @@
+// splitter override
+.as-split-gutter {
+    background-color: transparent !important;
+    cursor: e-resize !important;
+}
+
+.as-split-gutter-icon {
+    background-image: none !important;
+    background-color: rgba(0, 0, 0, .12);
+    width: 1px !important;
+}

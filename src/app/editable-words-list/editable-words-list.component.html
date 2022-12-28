@@ -9,13 +9,13 @@
                     (click)="wordFormControl.setValue('')">
                     <mat-icon>close</mat-icon>
                 </button>
-                <button mat-raised-button color="primary" (click)="add()">Add</button>
+                <button mat-raised-button color="accent" (click)="add()">Add</button>
             </div>
             <mat-error *ngIf="wordFormControl.hasError('exists')">
                 This word already exist
             </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="copy()">Copy</button>
+        <button mat-raised-button color="primary" (click)="copy()">Copy</button>
     </div>
     
     <div id="words-container">

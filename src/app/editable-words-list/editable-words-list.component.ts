@@ -1,21 +1,30 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { MatChipEditedEvent } from '@angular/material/chips';
 import {Clipboard} from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Editor } from '../editor';
 
 @Component({
     selector: 'app-editable-words-list',
     templateUrl: './editable-words-list.component.html',
     styleUrls: ['./editable-words-list.component.scss']
 })
-export class EditableWordsListComponent {
+export class EditableWordsListComponent extends Editor {
+    
     public wordFormControl = new FormControl('');
 
     public words: string[] = ["something", "something2"];
 
+    public onChange: EventEmitter<any> = new EventEmitter();
+
     constructor(private changeDetector: ChangeDetectorRef, private clipboard: Clipboard, private snackBar: MatSnackBar){
+        super();
         this.wordFormControl.addValidators(this.wordSubmitFormValidator.bind(this));
+    }
+
+    public override setData(data: any): void {
+        this.words = data;
     }
 
     protected copy(){
@@ -28,6 +37,10 @@ export class EditableWordsListComponent {
         });
     }
 
+    public override getDefaultData(): unknown {
+        return [];
+    }
+
     protected add(){
         this.wordFormControl.updateValueAndValidity();
         if(this.wordFormControl.valid){
@@ -36,6 +49,7 @@ export class EditableWordsListComponent {
                 const result = this.binarySearch(this.wordFormControl.value);
                 if(result.found === false){
                     this.words.splice(result.index, 0, this.wordFormControl.value);
+                    this.onChange.emit(this.words);
                 }
             }
             this.wordFormControl.setValue("");
@@ -44,6 +58,7 @@ export class EditableWordsListComponent {
 
     protected remove(index: number) {
         this.words.splice(index, 1);
+        this.onChange.emit(this.words);
     }
 
     protected edit(index: number, event: MatChipEditedEvent) {
@@ -55,6 +70,7 @@ export class EditableWordsListComponent {
         if(result.found === false){
             this.words.splice(result.index, 0, value);
         }
+        this.onChange.emit(this.words);
     }
 
     protected onInputKeyPress(event: KeyboardEvent){

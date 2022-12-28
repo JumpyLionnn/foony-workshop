@@ -1,21 +1,31 @@
-<mat-drawer-container id="drawer">
-    <mat-drawer mode="side" opened>
-        <mat-selection-list #shoes [multiple]="false">
-            <mat-list-option *ngFor="let item of items" [value]="item">
+<as-split direction="horizontal" unit="pixel" (dragEnd)="onToolsSplitterDragEnd($event)" #split>
+    <as-split-area [size]="150" [maxSize]="350" [minSize]="120">
+        <div id="item-list-header">
+            <h3>{{title}}</h3>
+            <button mat-raised-button color="accent" (click)="add()">Add</button>
+        </div>
+        
+        <mat-selection-list #itemsList [multiple]="false" (selectionChange)="onSelectionChange($event)">
+            <mat-list-option class="item" *ngFor="let item of items;" [value]="item">
                 {{item.name}}
             </mat-list-option>
         </mat-selection-list>
-    </mat-drawer>
-    <mat-drawer-content>
-        <div *ngIf="shoes.selectedOptions.hasValue()">
-            <mat-form-field id="name-input">
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Name" [(ngModel)]="shoes.selectedOptions.selected[0].value.name">
-            </mat-form-field>
+    </as-split-area>
+    <as-split-area >
+        <div *ngIf="itemsList.selectedOptions.hasValue()">
+            <div id="editor-header">
+                <mat-form-field id="name-input">
+                    <mat-label>Name</mat-label>
+                    <input matInput #nameInput placeholder="Name" [value]="itemsList.selectedOptions.selected[0].value.name" (input)="rename(itemsList.selectedOptions.selected[0].value.index, nameInput.value)">
+                </mat-form-field>
+                <button mat-mini-fab color="warn" aria-label="delete button" (click)="deleteItem(itemsList.selectedOptions.selected[0].value.index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
             <mat-divider></mat-divider>
             <div id="editor">
-                <ng-content></ng-content>
+                <ng-content #editor></ng-content>
             </div>
         </div>
-    </mat-drawer-content>
-</mat-drawer-container>
+    </as-split-area>
+</as-split>

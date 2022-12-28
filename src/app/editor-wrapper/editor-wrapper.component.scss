@@ -1,9 +1,26 @@
-#drawer{
-    height: 100%;
+
+
+#item-list-header{
+    margin: 0.5em 0 0 0.3em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h3{
+        margin: 0;
+    }
 }
 
-#name-input{
-    margin: 0.5em 0 0 0.5em;
+.item{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#editor-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0.5em 0 0.5em;
 }
 
 #editor{

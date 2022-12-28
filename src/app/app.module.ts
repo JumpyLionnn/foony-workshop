@@ -24,6 +24,22 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
+import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
+import { AngularSplitModule } from 'angular-split';
+
+const dbConfig: DBConfig  = {
+  name: "FoonyWorkshop",
+  version: 1,
+  objectStoresMeta: [{
+    store: 'wordsList',
+    storeConfig: { keyPath: 'id', autoIncrement: true },
+    storeSchema: [
+      { name: 'name', keypath: 'name', options: { unique: false } },
+      { name: 'data', keypath: 'fata', options: { unique: false } }
+    ]
+  }]
+};
+
 
 @NgModule({
     declarations: [
@@ -52,7 +68,9 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
         MatSnackBarModule,
         MatListModule,
 
-        ClipboardModule
+        ClipboardModule,
+        AngularSplitModule,
+        NgxIndexedDBModule.forRoot(dbConfig)
     ],
     providers: [],
     bootstrap: [AppComponent]
