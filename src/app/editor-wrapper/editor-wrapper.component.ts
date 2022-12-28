@@ -77,6 +77,8 @@ export class EditorWrapperComponent implements AfterViewInit {
             .subscribe((record) => {
                 this.items.unshift({ ...record, index: 0 });
                 this.updateIndices();
+                this.changeDetector.detectChanges();
+                this.itemsList.selectedOptions.select(this.itemsList._items.first);
             });
     }
 
