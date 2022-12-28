@@ -2,9 +2,11 @@
     <mat-toolbar color="primary">
         <button mat-flat-button color="primary" routerLink="/">Foony's Workshop</button>
         <div id="navigation">
+            <button mat-button color="accent" routerLink="/wordslist">Words List Editor</button>
             <button mat-button color="accent" routerLink="/about">About</button>
         </div>
     </mat-toolbar>
+    <app-editor-wrapper></app-editor-wrapper>
     <div id="page">
         <router-outlet></router-outlet>
     </div>

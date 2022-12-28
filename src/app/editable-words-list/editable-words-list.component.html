@@ -1,0 +1,33 @@
+<div>
+    <div id="header">
+        <mat-form-field id="word-input">
+            <mat-label>Word</mat-label>
+            <input matInput type="text" [formControl]="wordFormControl" autocomplete="off" spellcheck="false" maxlength="50"
+                placeholder="Search/Add word..." (keypress)="onInputKeyPress($event)" (input)="onWordInputChange()">
+            <div id="word-input-suffix" matSuffix>
+                <button *ngIf="wordFormControl.value" mat-icon-button aria-label="Clear"
+                    (click)="wordFormControl.setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" (click)="add()">Add</button>
+            </div>
+            <mat-error *ngIf="wordFormControl.hasError('exists')">
+                This word already exist
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="copy()">Copy</button>
+    </div>
+    
+    <div id="words-container">
+        <ng-template ngFor let-word [ngForOf]="words" let-i="index">
+            <mat-chip-row class="word" *ngIf="word.includes(wordFormControl.value ?? '')" (removed)="remove(i)" [editable]="true"
+                (edited)="edit(i, $event)">
+                {{word}}
+                <button matChipRemove [attr.aria-label]="'remove ' + word">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+        </ng-template>
+
+    </div>
+</div>

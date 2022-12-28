@@ -1,0 +1,21 @@
+<mat-drawer-container id="drawer">
+    <mat-drawer mode="side" opened>
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let item of items" [value]="item">
+                {{item.name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div *ngIf="shoes.selectedOptions.hasValue()">
+            <mat-form-field id="name-input">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" [(ngModel)]="shoes.selectedOptions.selected[0].value.name">
+            </mat-form-field>
+            <mat-divider></mat-divider>
+            <div id="editor">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
